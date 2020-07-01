@@ -4,6 +4,7 @@ import (
 	"runtime"
 	"gin-demo/config"
 	"github.com/gin-gonic/gin"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 func main() {
