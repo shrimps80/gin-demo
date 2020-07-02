@@ -19,4 +19,6 @@ var env = Env{
 	RedisPort:     "6379",
 	RedisPassword: "",
 	RedisDb:       0,
+	
+	AccessLogPath: "storage/logs/access.log",
 }

@@ -18,6 +18,8 @@ type Env struct {
 	RedisPort     string
 	RedisPassword string
 	RedisDb       int
+	
+	AccessLogPath string
 }
 
 func GetEnv() *Env {
