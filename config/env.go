@@ -14,11 +14,13 @@ var env = Env{
 	MaxOpenConns: 100,
 	
 	MongodbHost: "10.32.5.87:27017",
+	MongodbName: "pms",
 	
 	RedisIp:       "127.0.0.1",
 	RedisPort:     "6379",
 	RedisPassword: "",
 	RedisDb:       11,
 	
-	AccessLogPath: "storage/logs/access.log",
+	AccessLogDevice: "mongodb", //mongodb or file
+	AccessLogPath:   "storage/logs/access.log",
 }

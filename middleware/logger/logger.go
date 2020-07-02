@@ -2,14 +2,15 @@ package logger
 
 import (
 	"os"
-	"fmt"
 	"log"
+	"fmt"
 	"bytes"
 	"github.com/gin-gonic/gin"
 	"gin-demo/modules/tools"
 	"gin-demo/modules/response"
 	"encoding/json"
 	"gin-demo/config"
+	"gin-demo/modules/database/mongo"
 )
 
 type bodyLogWriter struct {
@@ -92,11 +93,22 @@ func SetUp() gin.HandlerFunc {
 }
 
 func handleAccessChannel() {
-	if f, err := os.OpenFile(config.GetEnv().AccessLogPath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666); err != nil {
-		log.Println(err)
-	} else {
+	if config.GetEnv().AccessLogDevice == "file" {
+		if f, err := os.OpenFile(config.GetEnv().AccessLogPath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666); err != nil {
+			log.Println(err)
+		} else {
+			for accessLog := range accessChannel {
+				_, _ = f.WriteString(accessLog + "\n")
+			}
+		}
+	}
+	
+	if config.GetEnv().AccessLogDevice == "mongodb" {
+		name := fmt.Sprintf("access_log_%s", tools.GetToday())
 		for accessLog := range accessChannel {
-			_, _ = f.WriteString(accessLog + "\n")
+			logMap := make(map[string]interface{})
+			json.Unmarshal([]byte(accessLog), &logMap)
+			mongo.Client.InsertOne(name, logMap)
 		}
 	}
 	return

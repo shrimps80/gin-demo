@@ -13,13 +13,15 @@ type Env struct {
 	MaxOpenConns int
 	
 	MongodbHost string
+	MongodbName string
 	
 	RedisIp       string
 	RedisPort     string
 	RedisPassword string
 	RedisDb       int
 	
-	AccessLogPath string
+	AccessLogDevice string
+	AccessLogPath   string
 }
 
 func GetEnv() *Env {
