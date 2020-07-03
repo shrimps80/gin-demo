@@ -11,5 +11,6 @@ type ErrResponse struct {
 }
 
 var (
-	ErrorNotFound = ErrResponse{HttpSC: 404, Error: Err{Error: "很抱歉您访问的地址或者方法不存在", ErrorCode: -1}}
+	ErrorNotFound = ErrResponse{HttpSC: 404, Error: Err{Error: "很抱歉您访问的地址不存在", ErrorCode: -1}}
+	ErrorNotMethod = ErrResponse{HttpSC: 404, Error: Err{Error: "很抱歉您访问的方法不存在", ErrorCode: -1}}
 )

@@ -14,6 +14,10 @@ func initRouter() *gin.Engine {
 		response.ReturnErrorJson(c, defs.ErrorNotFound)
 	})
 	
+	r.NoMethod(func(c *gin.Context) {
+		response.ReturnErrorJson(c, defs.ErrorNotMethod)
+	})
+	
 	routeRegister.RegisterApiRouter(r)
 	
 	return r
