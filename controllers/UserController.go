@@ -11,6 +11,7 @@ import (
 	"gin-demo/modules/tools"
 	"github.com/silenceper/log"
 	"gin-demo/modules/database/redis"
+	"gin-demo/modules/database/elasticsearch"
 )
 
 func GetUserInfo(c *gin.Context) {
@@ -23,6 +24,33 @@ func GetUserInfo(c *gin.Context) {
 		redisKey := fmt.Sprintf("user:%d", row.Id)
 		r := redis.Client
 		r.Set(redisKey, row.Name, 60*time.Second)
+		
+		//es
+		e := elasticsearch.Client
+		mapping := `{
+			"settings":{
+				"number_of_shards":1,
+				"number_of_replicas":0
+			},
+			"mappings":{
+				"properties":{
+					"id":{
+						"type":"long"
+					},
+					"name":{
+						"type":"text"
+					}
+				}
+			}
+		}`
+		idStr := tools.Int64ToString(row.Id)
+		e.IndexExists(mapping)
+		e.SetIndex(idStr, row)
+		ecData := e.GetIndex(idStr)
+		e.DelIndex(idStr)
+		response.ReturnHttpJsonData(c, ecData)
+		
+		return
 	}
-	response.ReturnHttpJsonData(c, row)
+	response.ReturnHttpJsonData(c, nil)
 }

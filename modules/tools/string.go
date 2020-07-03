@@ -17,6 +17,10 @@ func String2Int64(val string) int64 {
 	return num
 }
 
+func Int64ToString(val int64) string {
+	return strconv.FormatInt(val, 10)
+}
+
 // md5加密
 func Md5Str(s string) string {
 	return fmt.Sprintf("%x", md5.Sum([]byte(s)))

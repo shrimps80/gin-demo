@@ -20,6 +20,9 @@ type Env struct {
 	RedisPassword string
 	RedisDb       int
 	
+	EsServers   string
+	EsIndexName string
+	
 	AccessLogDevice string
 	AccessLogPath   string
 }

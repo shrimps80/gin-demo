@@ -21,6 +21,9 @@ var env = Env{
 	RedisPassword: "",
 	RedisDb:       11,
 	
-	AccessLogDevice: "mongodb", //mongodb or file
+	EsServers:   "http://127.0.0.1:9200/",
+	EsIndexName: "subject",
+	
+	AccessLogDevice: "file", //mongodb or file
 	AccessLogPath:   "storage/logs/access.log",
 }

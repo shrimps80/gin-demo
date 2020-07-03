@@ -8,4 +8,5 @@
     - [x] MySQL
     - [x] Redis
     - [x] MongoDB
+    - [x] ES
 - [ ] gRPC
