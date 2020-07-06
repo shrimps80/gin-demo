@@ -26,4 +26,7 @@ var env = Env{
 	
 	AccessLogDevice: "file", //mongodb or file
 	AccessLogPath:   "storage/logs/access.log",
+	
+	
+	GrpcClient: "127.0.0.1:50051",
 }

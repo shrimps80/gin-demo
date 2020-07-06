@@ -6,10 +6,11 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
+	"gin-demo/config"
 )
 
 func CreateServiceConn(c *gin.Context) *grpc.ClientConn {
-	return createGrpcConn("127.0.0.1:50051", c)
+	return createGrpcConn(config.GetEnv().GrpcClient, c)
 }
 
 func createGrpcConn(serviceAddress string, c *gin.Context) *grpc.ClientConn {
