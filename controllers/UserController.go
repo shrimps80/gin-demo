@@ -19,9 +19,10 @@ import (
 	"gin-demo/modules/grpc"
 	"gin-demo/protot/helloworld"
 	"github.com/davecgh/go-spew/spew"
+	"gin-demo/services"
 )
 
-func GetUserInfo(c *gin.Context) {
+func GetDemoInfo(c *gin.Context) {
 	// validate
 	u := User.UserForm{}
 	
@@ -83,5 +84,47 @@ func GetUserInfo(c *gin.Context) {
 		response.ReturnHttpJsonData(c, ecData)
 		return
 	}
+	response.ReturnHttpJsonData(c, nil)
+}
+
+func Login(c *gin.Context) {
+	u := User.UserLogin{}
+	
+	s, e := tools.Bind(&u, c)
+	if e != nil {
+		response.ReturnErrorJson(c, defs.ErrorLostParams)
+		return
+	}
+	
+	v := validate.Struct(s)
+	if !v.Validate() {
+		fmt.Println(v.Errors) // 所有的错误消息
+		//fmt.Println(v.Errors.One()) // 返回随机一条错误消息
+		//fmt.Println(v.Errors.Field("Name")) // 返回该字段的错误消息
+		response.ReturnErrorJson(c, defs.ValidateErr(v.Errors.One()))
+		return
+	}
+	
+	res, err := services.UserLoginByEmail(u.Email, u.Password)
+	if err != nil {
+		log.Error(fmt.Sprintf("login fail: %v", err.Error()))
+		response.ReturnErrorJson(c, defs.LoginFail)
+		return
+	}
+	response.ReturnHttpJsonData(c, res)
+}
+
+func GetLoginUser(c *gin.Context) {
+	userId := c.GetInt64("user_id")
+	row, err := Users.GetOneById(userId)
+	if err != nil {
+		log.Error(err.Error())
+	}
+	response.ReturnHttpJsonData(c, row)
+}
+
+func Logout(c *gin.Context) {
+	userId := c.GetInt64("user_id")
+	redis.Client.Del(tools.UserTokenKey(userId))
 	response.ReturnHttpJsonData(c, nil)
 }

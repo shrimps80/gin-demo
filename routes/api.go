@@ -6,6 +6,7 @@ import (
 	"gin-demo/controllers"
 	"gin-demo/middleware/logger"
 	"gin-demo/middleware/cors"
+	"gin-demo/middleware/auth"
 )
 
 func RegisterApiRouter(router *gin.Engine) {
@@ -17,5 +18,13 @@ func RegisterApiRouter(router *gin.Engine) {
 		response.ReturnHttpJsonData(c, "pong")
 	})
 	
-	apiRouter.GET("/user/:id", controllers.GetUserInfo)
+	apiRouter.GET("/demo/:id", controllers.GetDemoInfo)
+	
+	apiRouter.POST("/user/login", controllers.Login)
+	
+	apiRouter.Use(auth.SetUp())
+	{
+		apiRouter.GET("/user/info", controllers.GetLoginUser)
+		apiRouter.GET("/user/logout", controllers.Logout)
+	}
 }

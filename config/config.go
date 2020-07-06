@@ -27,6 +27,8 @@ type Env struct {
 	AccessLogPath   string
 	
 	GrpcClient string
+	
+	AppSecret string
 }
 
 func GetEnv() *Env {

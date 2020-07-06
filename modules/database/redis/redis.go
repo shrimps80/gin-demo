@@ -20,12 +20,12 @@ func init() {
 	})
 }
 
-func (client *ClientType) Set(key string, value interface{}, expiration time.Duration) *redis.Client {
+func (client *ClientType) Set(key string, value interface{}, expiration time.Duration) error {
 	err := client.Conn.Set(key, value, expiration).Err()
 	if err != nil {
-		panic(err)
+		return err
 	}
-	return (*client).Conn
+	return nil
 }
 
 func (client *ClientType) Incr(key string) int64 {
