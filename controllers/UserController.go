@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"time"
+	"context"
 	"gin-demo/models/Users"
 	
 	"github.com/gin-gonic/gin"
@@ -15,6 +16,9 @@ import (
 	"gin-demo/filter/User"
 	"gin-demo/defs"
 	"github.com/gookit/validate"
+	"gin-demo/modules/grpc"
+	"gin-demo/protot/helloworld"
+	"github.com/davecgh/go-spew/spew"
 )
 
 func GetUserInfo(c *gin.Context) {
@@ -69,8 +73,14 @@ func GetUserInfo(c *gin.Context) {
 		e.SetIndex(idStr, row)
 		ecData := e.GetIndex(idStr)
 		e.DelIndex(idStr)
-		response.ReturnHttpJsonData(c, ecData)
 		
+		// 调用grpc
+		conn := grpc.CreateServiceConn(c)
+		grpcClient := helloworld.NewGreeterClient(conn)
+		res, _ := grpcClient.SayHello(context.Background(), &helloworld.HelloRequest{Name: row.Name})
+		spew.Dump(res)
+		
+		response.ReturnHttpJsonData(c, ecData)
 		return
 	}
 	response.ReturnHttpJsonData(c, nil)
