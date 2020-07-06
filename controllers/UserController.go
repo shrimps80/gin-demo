@@ -12,9 +12,30 @@ import (
 	"github.com/silenceper/log"
 	"gin-demo/modules/database/redis"
 	"gin-demo/modules/database/elasticsearch"
+	"gin-demo/filter/User"
+	"gin-demo/defs"
+	"github.com/gookit/validate"
 )
 
 func GetUserInfo(c *gin.Context) {
+	// validate
+	u := User.UserForm{}
+	
+	s, e := tools.Bind(&u, c)
+	if e != nil {
+		response.ReturnErrorJson(c, defs.ErrorLostParams)
+		return
+	}
+	
+	v := validate.Struct(s)
+	if !v.Validate() {
+		fmt.Println(v.Errors) // 所有的错误消息
+		//fmt.Println(v.Errors.One()) // 返回随机一条错误消息
+		//fmt.Println(v.Errors.Field("Name")) // 返回该字段的错误消息
+		response.ReturnErrorJson(c, defs.ValidateErr(v.Errors.One()))
+		return
+	}
+	
 	id := tools.String2Int64(c.Param("id"))
 	row, err := Users.GetOneById(id)
 	if err != nil {
