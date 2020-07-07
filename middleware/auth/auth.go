@@ -18,24 +18,28 @@ func SetUp() gin.HandlerFunc {
 		if token == "" {
 			response.ReturnErrorJson(c, defs.LoginAuthFail)
 			c.Abort()
+			return
 		}
 		
 		user, err := services.ValidateToken(token)
 		if err != nil {
 			response.ReturnErrorJson(c, defs.LoginAuthFail)
 			c.Abort()
+			return
 		}
 		
 		uToken, err := redis.Client.Get(tools.UserTokenKey(user.Id))
 		if err != nil {
 			response.ReturnErrorJson(c, defs.LoginAuthFail)
 			c.Abort()
+			return
 		}
 		
 		if len(uToken) == 0 || uToken != token {
 			logs.Error("validate token, lose !!")
 			response.ReturnErrorJson(c, defs.LoginAuthFail)
 			c.Abort()
+			return
 		}
 		
 		c.Set("user_id", user.Id)
