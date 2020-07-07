@@ -24,8 +24,9 @@ var env = Env{
 	EsServers:   "http://127.0.0.1:9200/",
 	EsIndexName: "subject",
 	
-	AccessLogDevice: "file", //mongodb or file
-	AccessLogPath:   "storage/logs/access.log",
+	AppLogDevice:  "file", //mongodb or file
+	AccessLogPath: "storage/logs/access.log",
+	GrpcLogPath:   "storage/logs/grpc.log",
 	
 	
 	GrpcClient: "127.0.0.1:50051",

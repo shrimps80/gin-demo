@@ -15,6 +15,7 @@
     - [x] ES
 - [x] gRPC
     - [x] 客户端
+    - [x] 日志记录
 
 ## Proto
 ```apple js

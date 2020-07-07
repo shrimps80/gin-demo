@@ -93,7 +93,7 @@ func SetUp() gin.HandlerFunc {
 }
 
 func handleAccessChannel() {
-	if config.GetEnv().AccessLogDevice == "file" {
+	if config.GetEnv().AppLogDevice == "file" {
 		if f, err := os.OpenFile(config.GetEnv().AccessLogPath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666); err != nil {
 			log.Println(err)
 		} else {
@@ -103,7 +103,7 @@ func handleAccessChannel() {
 		}
 	}
 	
-	if config.GetEnv().AccessLogDevice == "mongodb" {
+	if config.GetEnv().AppLogDevice == "mongodb" {
 		name := fmt.Sprintf("access_log_%s", tools.GetToday())
 		for accessLog := range accessChannel {
 			logMap := make(map[string]interface{})

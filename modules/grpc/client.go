@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"gin-demo/config"
+	"github.com/grpc-ecosystem/go-grpc-middleware"
 )
 
 func CreateServiceConn(c *gin.Context) *grpc.ClientConn {
@@ -26,7 +27,9 @@ func createGrpcConn(serviceAddress string, c *gin.Context) *grpc.ClientConn {
 		serviceAddress,
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-		grpc.WithInsecure(),
+		grpc.WithUnaryInterceptor(
+			grpc_middleware.ChainUnaryClient(ClientInterceptor()),
+		),
 	)
 	
 	if err != nil {

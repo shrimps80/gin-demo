@@ -23,10 +23,11 @@ type Env struct {
 	EsServers   string
 	EsIndexName string
 	
-	AccessLogDevice string
-	AccessLogPath   string
+	AppLogDevice  string
+	AccessLogPath string
 	
-	GrpcClient string
+	GrpcClient  string
+	GrpcLogPath string
 	
 	AppSecret string
 }
