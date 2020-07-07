@@ -22,3 +22,8 @@
 ```apple js
 protoc -I . --go_out=plugins=grpc:. ./helloworld.proto
 ```
+
+## Skip sign
+```apple js
+skip_debug=18120080
+```
