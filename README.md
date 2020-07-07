@@ -17,6 +17,7 @@
 - [x] gRPC
     - [x] 客户端
     - [x] 日志记录
+- [x] cron定时任务
 
 ## Proto
 ```apple js

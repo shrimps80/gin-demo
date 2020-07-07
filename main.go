@@ -5,6 +5,7 @@ import (
 	"gin-demo/config"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "gin-demo/modules/cron"
 )
 
 func main() {
