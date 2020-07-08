@@ -2,5 +2,5 @@
 gin-demo.exe
 gin-demo.exe~
 *.log
-/vendor/
+/vendor/*
 !/vendor/vendor.json
