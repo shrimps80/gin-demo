@@ -27,7 +27,7 @@ func ReturnHttpJsonData(c *gin.Context, val interface{}) {
 	}
 	responseTo(c, Response{
 		Code:    0,
-		Message: "",
+		Message: "ok",
 		Data:    val,
 	}, http.StatusOK)
 }
