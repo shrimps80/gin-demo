@@ -1,7 +1,6 @@
 # gin-demo
 
 ## Features
-
 - [x] 路由中间件
     - [x] api签名
     - [x] 日志记录
@@ -21,11 +20,22 @@
 - [x] cron定时任务
 
 ## Proto
-```apple js
+```
 protoc -I . --go_out=plugins=grpc:. ./helloworld.proto
 ```
 
 ## Skip sign
-```apple js
+```
 skip_debug=18120080
+```
+
+## govendor 
+初始化vendor目录
+```
+govendor init
+```
+
+将GOPATH中本工程使用到的依赖包自动移动到vendor目录中
+```
+govendor add +external
 ```
