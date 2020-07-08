@@ -14,6 +14,7 @@
     - [x] Redis
     - [x] MongoDB
     - [x] ES
+    - [x] RabbitMq
 - [x] gRPC
     - [x] 客户端
     - [x] 日志记录

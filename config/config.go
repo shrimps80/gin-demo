@@ -29,6 +29,10 @@ type Env struct {
 	GrpcClient  string
 	GrpcLogPath string
 	
+	MqServers  string
+	MQName     string
+	MQPassword string
+	
 	AppSecret string
 }
 

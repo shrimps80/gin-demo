@@ -32,4 +32,8 @@ var env = Env{
 	GrpcClient: "127.0.0.1:50051",
 	
 	AppSecret: "abc",
+	
+	MqServers:  "127.0.0.1:5672",
+	MQName:     "guest",
+	MQPassword: "guest",
 }

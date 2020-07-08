@@ -20,6 +20,7 @@ import (
 	"gin-demo/protot/helloworld"
 	"github.com/davecgh/go-spew/spew"
 	"gin-demo/services"
+	"gin-demo/modules/database/rabbitmq"
 )
 
 func GetDemoInfo(c *gin.Context) {
@@ -80,6 +81,10 @@ func GetDemoInfo(c *gin.Context) {
 		grpcClient := helloworld.NewGreeterClient(conn)
 		res, _ := grpcClient.SayHello(context.Background(), &helloworld.HelloRequest{Name: row.Name})
 		spew.Dump(res)
+		
+		// rabbitMq
+		mq := rabbitmq.Client
+		mq.PublishSimple("hello", fmt.Sprintf("hello, %s", row.Name))
 		
 		response.ReturnHttpJsonData(c, ecData)
 		return
