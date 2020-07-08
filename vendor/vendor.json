@@ -3,6 +3,18 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "GMZkEYluRh1pZxi3q6jMhRqWJTg=",
+			"path": "github.com/alecthomas/template",
+			"revision": "fb15b899a75114aa79cc930e33c46b577cc664b1",
+			"revisionTime": "2019-07-18T01:26:54Z"
+		},
+		{
+			"checksumSHA1": "j258GVxrs5Kv6o9lwUbK+KOgcNY=",
+			"path": "github.com/alecthomas/template/parse",
+			"revision": "fb15b899a75114aa79cc930e33c46b577cc664b1",
+			"revisionTime": "2019-07-18T01:26:54Z"
+		},
+		{
 			"checksumSHA1": "JxtbfXmiK+JDMT3A9Vt2eUL4Rg8=",
 			"origin": "go.mongodb.org/mongo-driver/vendor/github.com/aws/aws-sdk-go/aws",
 			"path": "github.com/aws/aws-sdk-go/aws",

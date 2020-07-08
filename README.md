@@ -18,6 +18,7 @@
     - [x] 客户端
     - [x] 日志记录
 - [x] cron定时任务
+- [x] swagger
 
 ## Proto
 ```
@@ -39,3 +40,10 @@ govendor init
 ```
 govendor add +external
 ```
+
+## swagger
+http://127.0.0.1:8000/swagger/index.html
+```
+swag init
+```
+

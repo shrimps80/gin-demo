@@ -23,6 +23,12 @@ import (
 	"gin-demo/modules/database/rabbitmq"
 )
 
+// @Summary demo实例
+// @Produce  json
+// @Param id query int true "Id"
+// @Param name query string true "Name"
+// @Success 200 {string} json "{"code":0,"data":{"email": "xxxx", "id": 1, "name": "xxx"},"msg":""}"
+// @Router /api/demo/:id [get]
 func GetDemoInfo(c *gin.Context) {
 	// validate
 	u := User.UserForm{}
