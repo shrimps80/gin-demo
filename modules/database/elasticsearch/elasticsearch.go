@@ -1,10 +1,11 @@
 package elasticsearch
 
 import (
-	"time"
-	"encoding/json"
 	"context"
+	"encoding/json"
 	"gin-demo/config"
+	"time"
+
 	"github.com/olivere/elastic"
 )
 
@@ -19,11 +20,12 @@ var (
 
 func init() {
 	var err error
-	
+
 	Client.Conn, err = elastic.NewClient(
 		elastic.SetHealthcheckInterval(10*time.Second),
 		elastic.SetMaxRetries(3),
 		elastic.SetURL(config.GetEnv().EsServers),
+		elastic.SetSniff(false),
 	)
 	if err != nil {
 		panic(err)
@@ -54,11 +56,11 @@ func (client *EsType) SetIndex(id string, data interface{}) *elastic.IndexRespon
 		BodyJson(data).
 		Refresh("wait_for").
 		Do(ctx)
-	
+
 	if err != nil {
 		panic(err)
 	}
-	
+
 	return doc
 }
 
@@ -71,7 +73,7 @@ func (client *EsType) GetIndex(id string) interface{} {
 	if err != nil {
 		panic(err)
 	}
-	
+
 	if result.Found {
 		var buf interface{}
 		err := json.Unmarshal(result.Source, &buf)
