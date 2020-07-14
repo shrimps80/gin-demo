@@ -25,6 +25,12 @@
 protoc -I . --go_out=plugins=grpc:. ./helloworld.proto
 ```
 
+## grpc-server
+```
+go run grpc-server/main.go
+```
+
+
 ## Skip sign
 ```
 skip_debug=18120080
@@ -45,5 +51,16 @@ govendor add +external
 http://127.0.0.1:8000/swagger/index.html
 ```
 swag init
+```
+
+## docker
+```
+$ cd docker
+$ docker-compose up -d
+```
+
+## docker ip
+```
+$ docker-machine ip
 ```
 
